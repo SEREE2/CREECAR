@@ -18,9 +18,9 @@
     // ตรวจสอบว่ามีเครื่องหมาย ? หรือไม่
     if (link1.includes("?")) {
         params = link1.split("?")[1].split("&")[0]; // ดึงค่าพารามิเตอร์แรก
-        sessionStorage.setItem("lastParams", params); // เก็บค่าไว้ใน sessionStorage
+        localStorage.setItem("lastParams", params); // เก็บค่าไว้ใน localStorage
     } else {
-        params = sessionStorage.getItem("lastParams") || ""; // ใช้ค่าที่เก็บไว้ ถ้าไม่มีให้เป็น ""
+        params = localStorage.getItem("lastParams") || ""; // ใช้ค่าที่เก็บไว้ ถ้าไม่มีให้เป็น ""
     }
 
     // URL ปลายทาง
@@ -34,6 +34,7 @@
         document.querySelector("#myFrame").setAttribute("src", link3);
     }
 </script>
+
 
 
 <!-- <script>
