@@ -10,19 +10,17 @@
      
 <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="" id="myFrame"></iframe>
 
-  <script>
+<script>
     let link = window.location.href;
-    let link1 = decodeURIComponent(link); // แปลงค่าที่ encode
+    let link1 = decodeURIComponent(link);
     let params = "";
 
     // ตรวจสอบว่ามีเครื่องหมาย ? หรือไม่
     if (link1.includes("?")) {
         params = link1.split("?")[1].split("&")[0]; // ดึงค่าพารามิเตอร์แรก
-    }
-
-    // ถ้า params ว่าง ให้ลองดึงค่าจาก fragment (#) เผื่อ Facebook ใช้รูปแบบอื่น
-    if (!params && link1.includes("#")) {
-        params = link1.split("#")[1].split("&")[0];
+        sessionStorage.setItem("lastParams", params); // เก็บค่าไว้ใน sessionStorage
+    } else {
+        params = sessionStorage.getItem("lastParams") || ""; // ใช้ค่าที่เก็บไว้ ถ้าไม่มีให้เป็น ""
     }
 
     // URL ปลายทาง
@@ -36,6 +34,7 @@
         document.querySelector("#myFrame").setAttribute("src", link3);
     }
 </script>
+
 
 <!-- <script>
     let link = window.location.href;
