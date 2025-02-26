@@ -10,7 +10,25 @@
      
 <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="" id="myFrame"></iframe>
 
-     <script>
+  <script>
+    let link = window.location.href;
+    let link1 = link.replaceAll("%2F", "/");
+    let link2 = link1.split("&")[0];
+
+    // ตรวจสอบว่ามี ? หรือไม่
+    let params = link2.includes("?") ? link2.split("?")[1] : "";
+
+    let link3 = "https://script.google.com/macros/s/AKfycbx6FZCUPRZxhbyWSLuDCCBQkWS0i9KF3H6Juv3iGxOeL1dBWjNsYbpp_l5VQ9LvmFzM/exec?seree=" + params;
+    console.log(link3);
+
+    if (link === "https://sereecar.github.io/index.html") {
+        document.querySelector("#myFrame").setAttribute("src", "");
+    } else {
+        document.querySelector("#myFrame").setAttribute("src", link3);
+    }
+</script>
+
+<!--      <script>
        let link = window.location.href;
        let link1 = link.replaceAll("%2F","/");
        let link2 = link1.split("&")[0];
@@ -21,5 +39,5 @@
         }else{
            document.querySelector("#myFrame").setAttribute("src",link3)
         }
-     </script> 
+     </script>  -->
 </html>
