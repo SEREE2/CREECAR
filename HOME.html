@@ -10,6 +10,7 @@
      
 <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="" id="myFrame"></iframe>
 
+
 <script>
     let link = window.location.href;
     let link1 = decodeURIComponent(link);
@@ -18,9 +19,13 @@
     // ตรวจสอบว่ามีเครื่องหมาย ? หรือไม่
     if (link1.includes("?")) {
         params = link1.split("?")[1].split("&")[0]; // ดึงค่าพารามิเตอร์แรก
-        localStorage.setItem("lastParams", params); // เก็บค่าไว้ใน localStorage
-    } else {
-        params = localStorage.getItem("lastParams") || ""; // ใช้ค่าที่เก็บไว้ ถ้าไม่มีให้เป็น ""
+
+        // ใช้ history.pushState() เพื่อเก็บค่าใน URL โดยไม่เปลี่ยนหน้า
+        let newUrl = window.location.origin + window.location.pathname;
+        window.history.pushState({ path: newUrl }, "", newUrl);
+
+    } else if (window.history.state && window.history.state.params) {
+        params = window.history.state.params; // ใช้ค่าจาก history ถ้ามี
     }
 
     // URL ปลายทาง
