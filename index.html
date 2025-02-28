@@ -1,25 +1,64 @@
- <html lang="en" data-rh="lang">
-      <link rel="icon" style="width: 100%; height: 100%;" href="https://lh5.googleusercontent.com/d/1yRi_GNMcuYWbtRqeoE-9yuveKEg-lrv_" data-rh="true">
-      <title>กรุงเทพซีรีคาร์ แพลตฟอร์มซื้อขายรถยนต์</title>
-      <meta data-rh="true" charset="utf-8">
-      <meta data-rh="true" name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1">
-      
-      <meta data-rh="true" name="description" content="ศูนย์รวมรถยนต์มือ2 คัดเกรดคุณภาพ นายหน้าและผู้ประกาศ">
-      
-      <meta data-rh="true" property="og:image" style="width: 100%; height: 100%;" content="https://lh5.googleusercontent.com/d/1fY3KLZZ12AMajvH4xlr9CnwPtusKg9kM">
-     
-<iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="" id="myFrame"></iframe>
 
-     <script>
-       let link = window.location.href;
-       let link1 = link.replaceAll("%2F","/");
-       let link2 = link1.split("&")[0];
-       let link3 = "https://script.google.com/macros/s/AKfycby5jHOnK_QIIuM1bjc6JuC6RGI20xrPCEs8JQ7qOVzamoWGuO3ESR8857jDnO7Y57cE/exec?seree="+link2.split("?")[1]
-       console.log(link3)
-        if(link == "https://sereecar.github.io/index.html"){
-           document.querySelector("#myFrame").setAttribute("src","")
-        }else{
-           document.querySelector("#myFrame").setAttribute("src",link3)
-        }
-     </script> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>กรุงเทพซีรีคาร์ แพลตฟอร์มซื้อขายรถยนต์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ศูนย์รวมรถยนต์มือ2 คัดเกรดคุณภาพ ราคาถูก ซื้อขายง่ายและปลอดภัย">
+  <link rel="icon" href="https://lh5.googleusercontent.com/d/1yRi_GNMcuYWbtRqeoE-9yuveKEg-lrv_">
+  <meta property="og:image" content="https://lh5.googleusercontent.com/d/1fY3KLZZ12AMajvH4xlr9CnwPtusKg9kM">
+  <!-- สไตล์สำหรับให้ iframe ครอบคลุมทั้งหน้าจอ -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #myFrame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+  <!-- โหลดสคริปต์แบบ defer เพื่อให้ HTML โหลดก่อน -->
+  <script defer>
+    (function(){
+      var currentUrl = window.location.href;
+      var params = "";
+      
+      // ถ้ามีพารามิเตอร์ใน URL (หลังเครื่องหมาย ?)
+      if(currentUrl.indexOf("?") !== -1) {
+         params = currentUrl.split("?")[1].split("&")[0];
+         // รีเซ็ต URL โดยไม่แสดงพารามิเตอร์
+         var newUrl = window.location.origin + window.location.pathname;
+         window.history.pushState({ path: newUrl }, "", newUrl);
+      } else if(window.history.state && window.history.state.params) {
+         params = window.history.state.params;
+      }
+      
+      // สร้าง URL สำหรับ Google Script
+      var destinationUrl = "https://script.google.com/macros/s/AKfycby5jHOnK_QIIuM1bjc6JuC6RGI20xrPCEs8JQ7qOVzamoWGuO3ESR8857jDnO7Y57cE/exec?seree=" + params;
+      console.log(destinationUrl);
+      
+      // เมื่อ DOM พร้อมแล้ว ให้เซ็ตค่า src ให้กับ iframe
+      document.addEventListener("DOMContentLoaded", function(){
+         var iframe = document.getElementById("myFrame");
+         // หาก URL มี "sereecar.github.io/index.html" ให้ไม่โหลดอะไร
+         if(currentUrl.indexOf("sereecar.github.io/index.html") !== -1) {
+            iframe.src = "";
+         } else {
+            iframe.src = destinationUrl;
+         }
+      });
+    })();
+  </script>
+</head>
+<body>
+  <iframe id="myFrame"></iframe>
+</body>
 </html>
