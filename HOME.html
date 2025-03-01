@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,10 @@
   <meta name="description" content="ศูนย์รวมรถยนต์มือ2 คัดเกรดคุณภาพ ราคาถูก ซื้อขายง่ายและปลอดภัย">
   <link rel="icon" href="https://lh5.googleusercontent.com/d/1yRi_GNMcuYWbtRqeoE-9yuveKEg-lrv_">
   <meta property="og:image" content="https://lh5.googleusercontent.com/d/1fY3KLZZ12AMajvH4xlr9CnwPtusKg9kM">
+  <!-- กำหนด URL ที่ต้องการแชร์ให้ Facebook และ search engine ใช้ -->
+  <meta property="og:url" content="https://seree2.github.io/CREECAR/HOME??SE2tYTE1Jpt5XY89W7tGavCoS">
+  <link rel="canonical" href="https://seree2.github.io/CREECAR/HOME??SE2tYTE1Jpt5XY89W7tGavCoS">
+  
   <style>
     html, body {
       margin: 0;
@@ -24,28 +27,37 @@
       border: 0;
     }
   </style>
+  
   <script defer>
     (function(){
       var currentUrl = window.location.href;
       var params = "";
       
-      // ใช้ URLSearchParams เพื่อดึงค่าของพารามิเตอร์ 'id'
-      const urlParams = new URLSearchParams(window.location.search);
-      if(urlParams.has('id')){
-         params = urlParams.get('id');
+      // ตรวจสอบว่าลิงค์มี "??" หรือไม่ ถ้ามีให้นำส่วนหลัง "??" มาใช้เป็นพารามิเตอร์
+      if(currentUrl.indexOf("?") !== -1) {
+         params = currentUrl.split("?")[1];
+      } else if(currentUrl.indexOf("?") !== -1) {
+         // ถ้ามี "?" แต่พารามิเตอร์ที่พบเป็นของ Facebook (เช่น sfnsn) ให้ใช้ค่า default ที่ต้องการ
+         const urlParams = new URLSearchParams(window.location.search);
+         if(urlParams.has('sfnsn')){
+           params = "SE2tYTE1Jpt5XY89W7tGavCoS";
+         } else {
+           // หากไม่มีพารามิเตอร์ Facebook ให้ใช้ค่าที่มีอยู่ (หรือปรับให้เหมาะสมตามความต้องการ)
+           params = urlParams.toString();
+         }
       }
       
-      // เคลียร์ query string จาก URL เพื่อให้หน้าลิงค์ไม่แสดง ? และ parameter อื่น ๆ
+      // เคลียร์ query string จาก URL หลังจากได้ค่าแล้ว
       if(window.location.search){
          var newUrl = window.location.origin + window.location.pathname;
          window.history.replaceState({ path: newUrl, params: params }, "", newUrl);
       }
       
-      // สร้าง URL สำหรับ Google Script โดยใช้ค่าที่ได้จาก parameter id
-      var destinationUrl = "https://script.google.com/macros/s/AKfycbx6FZCUPRZxhbyWSLuDCCBQkWS0i9KF3H6Juv3iGxOeL1dBWjNsYbpp_l5VQ9LvmFzM/exec?seree=" + params;
+      // สร้าง URL สำหรับ Google Script โดยแนบค่าพารามิเตอร์ที่ต้องการ
+      var destinationUrl = "https://script.google.com/macros/s/AKfycby5jHOnK_QIIuM1bjc6JuC6RGI20xrPCEs8JQ7qOVzamoWGuO3ESR8857jDnO7Y57cE/exec?seree=" + params;
       console.log(destinationUrl);
       
-      // เมื่อ DOM พร้อมแล้ว เซ็ตค่า src ให้กับ iframe
+      // เมื่อ DOM พร้อมแล้ว ให้เซ็ตค่า src ให้กับ iframe
       document.addEventListener("DOMContentLoaded", function(){
          var iframe = document.getElementById("myFrame");
          if(currentUrl.indexOf("sereecar.github.io/index.html") !== -1) {
@@ -61,6 +73,7 @@
   <iframe id="myFrame"></iframe>
 </body>
 </html>
+
 
 
 
