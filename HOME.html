@@ -25,6 +25,9 @@
       border: 0;
     }
   </style>
+
+  <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="" id="myFrame"></iframe>
+  
   <!-- โหลดสคริปต์แบบ defer เพื่อให้ HTML โหลดก่อน -->
   <script defer>
     (function(){
@@ -40,23 +43,35 @@
       } else if(window.history.state && window.history.state.params) {
          params = window.history.state.params;
       }
-      
-      // สร้าง URL สำหรับ Google Script
-      var destinationUrl = "https://script.google.com/macros/s/AKfycbx6FZCUPRZxhbyWSLuDCCBQkWS0i9KF3H6Juv3iGxOeL1dBWjNsYbpp_l5VQ9LvmFzM/exec?seree=" + params;
-      console.log(destinationUrl);
-      
-      // เมื่อ DOM พร้อมแล้ว ให้เซ็ตค่า src ให้กับ iframe
-      document.addEventListener("DOMContentLoaded", function(){
-         var iframe = document.getElementById("myFrame");
-         // หาก URL มี "sereecar.github.io/index.html" ให้ไม่โหลดอะไร
-         if(currentUrl.indexOf("sereecar.github.io/index.html") !== -1) {
-            iframe.src = "";
-         } else {
-            iframe.src = destinationUrl;
-         }
-      });
-    })();
-  </script>
+    
+    let link = window.location.href;
+    let link1 = decodeURIComponent(link);
+    let params = "";
+
+    // ตรวจสอบว่ามีเครื่องหมาย ? หรือไม่
+    if (link1.includes("?")) {
+        params = link1.split("?")[1].split("&")[0]; // ดึงค่าพารามิเตอร์แรก
+
+        // ใช้ history.pushState() เพื่อเก็บค่าใน URL โดยไม่เปลี่ยนหน้า
+        let newUrl = window.location.origin + window.location.pathname;
+        window.history.pushState({ path: newUrl }, "", newUrl);
+
+    } else if (window.history.state && window.history.state.params) {
+        params = window.history.state.params; // ใช้ค่าจาก history ถ้ามี
+    }
+
+    // URL ปลายทาง
+    let link3 = "https://script.google.com/macros/s/AKfycbx6FZCUPRZxhbyWSLuDCCBQkWS0i9KF3H6Juv3iGxOeL1dBWjNsYbpp_l5VQ9LvmFzM/exec?seree=" + params;
+    console.log(link3);
+
+    // ตั้งค่า iframe
+    if (link.includes("sereecar.github.io/index.html")) {
+        document.querySelector("#myFrame").setAttribute("src", "");
+    } else {
+        document.querySelector("#myFrame").setAttribute("src", link3);
+    }
+</script>
+  
 </head>
 <body>
   <iframe id="myFrame"></iframe>
