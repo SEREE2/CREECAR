@@ -64,7 +64,23 @@
 </body>
 </html>
 
+<div id="loading" style="text-align: center;">
+  <p>กำลังโหลด...</p>
+</div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const iframe = document.getElementById("myFrame");
+    const loading = document.getElementById("loading");
+    iframe.src = "https://script.google.com/macros/s/AKfycbx6FZCUPRZxhbyWSLuDCCBQkWS0i9KF3H6Juv3iGxOeL1dBWjNsYbpp_l5VQ9LvmFzM/exec?seree=";
+    iframe.src = document.getElementById('searsdertych');
+
+    iframe.onload = function() {
+      loading.style.display = "none";
+      iframe.style.display = "block";
+    };
+  });
+</script>
 
 <!--  <!DOCTYPE html>
 <html lang="en">
