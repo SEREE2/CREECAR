@@ -51,7 +51,7 @@
       font-weight: bold;
       color: #2d7cff;
     }
-    #myFrame {
+    #myFrame2 {
       position: absolute;
       top: 0;
       left: 0;
@@ -67,7 +67,7 @@
   <div id="loading2">กำลังเตรียมโหลดแพลตฟอร์ม...</div>
 
   <!-- iframe -->
-  <iframe id="myFrame" src=""></iframe>
+  <iframe id="myFrame2" src=""></iframe>
   
   <script>
     (function() {
@@ -81,8 +81,8 @@
 
       console.log(link3);
 
-      let iframe = document.querySelector("#myFrame");
-      let loadingDiv = document.querySelector("#loading");
+      let iframe2 = document.querySelector("#myFrame2");
+      let loadingDiv2 = document.querySelector("#loading2");
 
       // เมื่อ iframe โหลดเสร็จให้ซ่อนข้อความ "กำลังโหลด..."
       iframe.onload = function() {
@@ -91,8 +91,8 @@
         //   loadingDiv.style.display = "none";
         // }, 1500);
        
-          loadingDiv.style.display = "none";
-          iframe.style.display = "block";
+          loadingDiv2.style.display = "none";
+          iframe2.style.display = "block";
       };
 
       // ตั้งค่า URL ให้ iframe โหลด
